@@ -1,4 +1,4 @@
-import React, {createContext, Dispatch, ReactNode, SetStateAction, useCallback, useContext, useEffect, useState} from 'react';
+import React, {createContext, ReactNode, useContext} from 'react';
 
 type AppContext = {
     
@@ -20,7 +20,7 @@ type AppContextProps = {
 
 export const AppContextProvider = ({children}: AppContextProps) => {
     
-
+    // TODO:: we can handle token validating here before give access to app
     return (
         <ctx.Provider value={{
             

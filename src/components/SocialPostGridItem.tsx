@@ -1,6 +1,9 @@
 import { formatCounts } from '../utils/utils';
 import { PlatformIcon } from './PlatformIcon';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import styles from './SocialPostGridItem.module.css';
+import { STATIC_IMAGES } from '../constants/AppUrls';
 
 type SocialPostGridItemProps = {
     title: string;
@@ -18,8 +21,21 @@ export const SocialPostGridItem = (props: SocialPostGridItemProps) => {
 
     return (
         <div className={styles['grid-item-container']}>
-            {/* TODO:: we can do optimization here by lazy loading the thumbnail image */}
-            <img height={'100%'} width={'100%'} src={thumbnail_image} alt={title}/>
+            {/* TODO:: could have handleded the css in better way for image */}
+            {/* TODO:: we can optimize more with scrollPosition for image load */}
+            <LazyLoadImage
+                className="content-grid-thumbnail"
+                wrapperClassName="content-grid-thumbnail"
+                alt={title}
+                src={thumbnail_image}
+                effect="blur"
+                onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = STATIC_IMAGES.posterPlaceholder;
+                }}
+                placeholderSrc={STATIC_IMAGES.posterPlaceholder}
+            />
+            {/* <img height={'100%'} width={'100%'} src={thumbnail_image} alt={title}/> */}
             <div className={styles['bottom-info']}>
                 <div className={styles.creator}>
                     <img src={creator_pro_pic} alt={title}/> 

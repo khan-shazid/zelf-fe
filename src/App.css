@@ -18,3 +18,8 @@ body {
   font-weight: 500;
   font-size: 14px;
 }
+
+.content-grid-thumbnail {
+  width: 100%;
+  height: 100%;
+}
