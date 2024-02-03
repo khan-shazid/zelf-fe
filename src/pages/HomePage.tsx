@@ -7,8 +7,6 @@ export function HomePage() {
         <div className={`container ${styles['home-page']}`}>
             <SocialPostsTableContainer/>
             <SocialPostsInfiniteGridViewContainer/>
-
-            
         </div>
     )
 }

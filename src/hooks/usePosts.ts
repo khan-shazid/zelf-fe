@@ -13,6 +13,7 @@ export function usePosts() {
         async (page = 1) => {
             setLoading(true);
             const result = await fetchPosts(page);
+            console.log("result ====>", result);
             setLoading(false);
             if (result.success) {
                 if (page > 1) setPosts((prev) => [...prev, ...result.data]);
@@ -33,7 +34,7 @@ export function usePosts() {
     }, [handleFetchData]);
 
     const handleScroll = useCallback(() => {
-        if (hasWindowScrolledHalf() && !loading) {
+        if (hasWindowScrolledHalf() && !loading && pagination) {
             const {  next } = pagination;
             if (next) {
                 handleFetchData(next);

@@ -8,6 +8,7 @@ import { usePosts } from '../hooks/usePosts';
 import { PlatformIcon } from '../components/PlatformIcon';
 import { formatCounts, formatDate } from '../utils/utils';
 import { Post } from '../models/Post';
+import { STATIC_IMAGES } from '../constants/AppUrls';
 
 export function SocialPostsTableContainer() {
     const {posts} = usePosts();
@@ -33,12 +34,24 @@ export function SocialPostsTableContainer() {
                 <tbody>
                     {
                         posts.map((post) => {
+                            const creatorIcon = post.creator?.profile_picture_url ? post.creator?.profile_picture_url : STATIC_IMAGES.profileImagePlaceholder;
                             return (
                                 <tr key={post.content.id}>
-                                    {/* TODO:: formatting timestamp */}
                                     <td align="left"><p className={styles.date}>{formatDate(post.content.timestamp, "MMM DD")}</p></td>
                                     <td align="left"><div className={styles.video}><Play/> <p>{post.content.title}</p></div></td>
-                                    <td align="left"><div className={styles.creator}><img src={post.creator.profile_picture_url} alt={post.creator.name}/> <p>@{post.creator.username}</p></div></td>
+                                    <td align="left">
+                                        <div className={styles.creator}>
+                                            <img 
+                                                src={creatorIcon} 
+                                                alt={post.creator.name}
+                                                onError={({ currentTarget }) => {
+                                                    currentTarget.onerror = null;
+                                                    currentTarget.src = STATIC_IMAGES.profileImagePlaceholder;
+                                                }}
+                                            /> 
+                                            <p>@{post.creator.username}</p>
+                                        </div>
+                                    </td>
                                     <td align="center"><div className={styles.platform}><PlatformIcon type={post.content.content_platform}/></div></td>
                                     <td align="center"><p className={styles['info-text']}>{formatCounts(post.content.views)}</p></td>
                                     <td align="center"><p className={styles['info-text']}>{formatCounts(post.content.total_engagement)}</p></td>

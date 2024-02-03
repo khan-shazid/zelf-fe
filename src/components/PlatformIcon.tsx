@@ -4,10 +4,10 @@ import { ReactComponent as Tiktok } from '../assets/icons/tiktok.svg';
 export const PlatformIcon = ({ type }) => {
     switch(type) {
         case 'instagram':
-            return <Instagram/>
+            return <Instagram/>;
         case 'tiktok':
-            return <Tiktok/>
+            return <Tiktok/>;
         default:
-          return <></>
+            return <Instagram/>;
       }
 }

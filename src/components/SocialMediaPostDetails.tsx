@@ -1,4 +1,5 @@
 import { ReactComponent as ExternalLink } from '../assets/icons/external-link.svg';
+import { STATIC_IMAGES } from '../constants/AppUrls';
 import { Post } from '../models/Post';
 import { formatCounts } from '../utils/utils';
 import styles from './SocialMediaPostDetails.module.css';
@@ -21,7 +22,14 @@ export const SocialMediaPostDetails = (props: SocialMediaPostDetailsProps) => {
             </div>
             <div className={styles['post-details']}>
                 <div className={styles.creator}>
-                    <img src={post.creator.profile_picture_url} alt={post.creator.name}/> 
+                    <img 
+                        src={post.creator.profile_picture_url} 
+                        alt={post.creator.name}
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src = STATIC_IMAGES.profileImagePlaceholder;
+                        }}
+                    /> 
                     <p className={styles['creator-name']}>{post.creator.name}</p>
                     {/* TODO:: timestamp fix */}
                     <p className={styles['creator-post-timeline']}>5 days ago</p>
@@ -35,15 +43,21 @@ export const SocialMediaPostDetails = (props: SocialMediaPostDetailsProps) => {
 
                 <div className={styles['stat-container']}>
                     <div>
-                        <p className={styles.count}>{formatCounts(post.content.views)}</p>
+                        <p className={styles.count}>
+                            {post.content.views ? formatCounts(post.content.views) : 'N/A'}
+                        </p>
                         <p className={styles.label}>Total Views</p>
                     </div>
                     <div>
-                        <p className={styles.count}>{formatCounts(post.content.likes)}</p>
+                        <p className={styles.count}>
+                            {post.content.likes ? formatCounts(post.content.likes) : 'N/A'}
+                        </p>
                         <p className={styles.label}>Total Likes</p>
                     </div>
                     <div>
-                        <p className={styles.count}>{formatCounts(post.content.comments)}</p>
+                        <p className={styles.count}>
+                            {post.content.comments ? formatCounts(post.content.comments) : 'N/A'}
+                        </p>
                         <p className={styles.label}>Total Comments</p>
                     </div>
                     <div>

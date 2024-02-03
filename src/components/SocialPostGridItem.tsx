@@ -6,14 +6,14 @@ import styles from './SocialPostGridItem.module.css';
 import { STATIC_IMAGES } from '../constants/AppUrls';
 
 type SocialPostGridItemProps = {
-    title: string;
-    thumbnail_image: string;
+    title?: string;
+    thumbnail_image?: string;
     platform: string;
-    creator_pro_pic: string;
-    creator_name: string;
-    post_view: number;
-    post_like: number;
-    post_comment: number;
+    creator_pro_pic?: string;
+    creator_name?: string;
+    post_view?: number;
+    post_like?: number;
+    post_comment?: number;
 }
 
 export const SocialPostGridItem = (props: SocialPostGridItemProps) => {
@@ -27,7 +27,7 @@ export const SocialPostGridItem = (props: SocialPostGridItemProps) => {
                 className="content-grid-thumbnail"
                 wrapperClassName="content-grid-thumbnail"
                 alt={title}
-                src={thumbnail_image}
+                src={thumbnail_image ? thumbnail_image : STATIC_IMAGES.posterPlaceholder}
                 effect="blur"
                 onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
@@ -35,10 +35,16 @@ export const SocialPostGridItem = (props: SocialPostGridItemProps) => {
                 }}
                 placeholderSrc={STATIC_IMAGES.posterPlaceholder}
             />
-            {/* <img height={'100%'} width={'100%'} src={thumbnail_image} alt={title}/> */}
             <div className={styles['bottom-info']}>
                 <div className={styles.creator}>
-                    <img src={creator_pro_pic} alt={title}/> 
+                    <img 
+                        src={creator_pro_pic ? creator_pro_pic : STATIC_IMAGES.profileImagePlaceholder} 
+                        alt={title}
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src = STATIC_IMAGES.profileImagePlaceholder;
+                        }}
+                    /> 
                     <p>{creator_name}</p>
                 </div>
                 <div className={styles['platform-icon']}>
