@@ -5,16 +5,17 @@ import './App.css';
 import { HomePage } from './pages/HomePage';
 
 function ZelfApp() {
-  return (
-    <AppContextProvider>
-        <div>
-            <Topbar/>
-            <Routes>
-                <Route path={'/'} element={<HomePage/>}/>
-            </Routes>
-        </div>  
-    </AppContextProvider>
-  );
+    // TODO:: we can lazy load components here as per need
+    return (
+        <AppContextProvider>
+            <div>
+                <Topbar/>
+                <Routes>
+                    <Route path={'/'} element={<HomePage/>}/>
+                </Routes>
+            </div>  
+        </AppContextProvider>
+    );
 }
 
 export default ZelfApp;
