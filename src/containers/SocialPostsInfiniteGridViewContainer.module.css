@@ -1,0 +1,15 @@
+.social-posts-infinite-container {
+    padding: 20px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    row-gap: 20px;
+    column-gap: 20px;
+}
