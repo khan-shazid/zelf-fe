@@ -6,7 +6,7 @@ import { ReactComponent as Sort } from '../assets/icons/sort.svg';
 import styles from './SocialPostsTableContainer.module.css';
 import { usePosts } from '../hooks/usePosts';
 import { PlatformIcon } from '../components/PlatformIcon';
-import { formatCounts } from '../utils/utils';
+import { formatCounts, formatDate } from '../utils/utils';
 import { Post } from '../models/Post';
 
 export function SocialPostsTableContainer() {
@@ -36,7 +36,7 @@ export function SocialPostsTableContainer() {
                             return (
                                 <tr key={post.content.id}>
                                     {/* TODO:: formatting timestamp */}
-                                    <td align="left"><p className={styles.date}>{post.content.timestamp}</p></td>
+                                    <td align="left"><p className={styles.date}>{formatDate(post.content.timestamp, "MMM DD")}</p></td>
                                     <td align="left"><div className={styles.video}><Play/> <p>{post.content.title}</p></div></td>
                                     <td align="left"><div className={styles.creator}><img src={post.creator.profile_picture_url} alt={post.creator.name}/> <p>@{post.creator.username}</p></div></td>
                                     <td align="center"><div className={styles.platform}><PlatformIcon type={post.content.content_platform}/></div></td>
